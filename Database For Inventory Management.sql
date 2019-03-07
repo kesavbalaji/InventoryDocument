@@ -5,6 +5,31 @@ create table inventoryLogin (registeredEmailId varchar(100), password varchar(50
 create table inventoryRegister(companyName varchar(250), emailAddress varchar(100),
 password varchar(50), phoneNumber int(25));
 
+create table inventoryDdsClient(ddsClientId varchar(250), firstName varchar(250), lastName varchar(250),
+updatedDate varchar(50), updatedTime varchar(50),primary key (ddsClientId));
+
+create table inventoryDdsClientInfo(ddsClientId varchar(250), address varchar(500), phoneNumber varchar(25), 
+ddsSoftwarePurchaseDate varchar(100),ddsSoftwareRenewalDate varchar(100), ddsSoftwareAccess varchar(250),
+ ddsSoftwarePrice varchar(250),
+foreign key(ddsClientId) references inventoryDdsClient(ddsClientId));
+
+create table inventoryRunningCustomer(runningCustomerId varchar(250), firstName varchar(250), lastName varchar(250),
+updatedDate varchar(50), updatedTime varchar(50),primary key (runningCustomerId));
+
+create table inventoryRunningCustomerInfo(runningCustomerId varchar(250),  address varchar(500), phoneNumber varchar(25), 
+howTheyKnowAboutUs varchar(500), forWhatTheyCameFor varchar(500), responseByOurTeam varchar(500),
+foreign key(runningCustomerId) references inventoryRunningCustomer(runningCustomerId));
+
+create table inventoryReseller(resellerId varchar(250), firstName varchar(250), lastName varchar(250),
+updatedDate varchar(50), updatedTime varchar(50),primary key (resellerId));
+
+create table inventoryResellerInfo(resellerId varchar(250), address varchar(500), phoneNumber varchar(25), 
+companyName varchar(500), repairedItem varchar(500), repairedCost varchar(500),
+foreign key (resellerId) references inventoryReseller(resellerId));
+
+create table inventoryManuallyInsertingModule(invoiceId varchar(500), invoiceItem varchar(500),
+invoiceQuantity varchar(250), gst varchar(250), sgst varchar(250), totalAmount varchar(250));
+
 create table inventoryClient (clientId varchar(250), firstName varchar(250), lastName varchar(250),
 updatedDate varchar(50), updatedTime varchar(50),primary key (clientId));
 
@@ -126,6 +151,12 @@ create table inventoryCustomerReport(reportId varchar(250), report varchar(250),
 foreign key(reportId) references inventoryReport(reportId));
 
 create table inventoryReportOnTechnicianByManagement(reportId varchar(250), report varchar(250),
+foreign key(reportId) references inventoryReport(reportId));
+
+create table inventoryRunningCustomerReport(reportId varchar(250), report varchar(250),
+foreign key(reportId) references inventoryReport(reportId));
+
+create table inventoryResellerReport(reportId varchar(250), report varchar(250),
 foreign key(reportId) references inventoryReport(reportId));
 
 create table inventoryNeedToBeService(catalogId varchar(250), catalogTypes varchar(250),
